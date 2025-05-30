@@ -226,6 +226,11 @@ spec:
         echo "--- Processing $original_sbom_relpath ---"
 
         echo "Getting OIDC token from $token_endpoint"
+        echo curl "${curl_opts[@]}" \
+            -u "${oidc_client_id}:${oidc_client_secret}" \
+            -d "grant_type=client_credentials" \
+            "$token_endpoint"
+            
         token_response="$(
           curl "${curl_opts[@]}" \
             -u "${oidc_client_id}:${oidc_client_secret}" \
@@ -234,6 +239,7 @@ spec:
         )"
         # https://www.rfc-editor.org/rfc/rfc6749.html#section-5.1
         access_token="$(jq -r .access_token <<< "$token_response")"
+        echo $access_token
         token_type="$(jq -r .token_type <<< "$token_response")"
         expires_in="$(jq -r ".expires_in // empty" <<< "$token_response")"
 
@@ -262,7 +268,7 @@ spec:
           -H "transfer-encoding: chunked" \
           -H "content-type: application/json" \
           --data "@$supported_version_of_sbom" \
-          "$bombastic_api_url/api/v1/sbom?id=$sbom_id"
+          "$bombastic_api_url/api/v2/sbom?id=$sbom_id"
       done
 
   - name: report
