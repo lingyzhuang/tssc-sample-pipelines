@@ -124,6 +124,7 @@ spec:
 
       if [[ -n "${TUF_MIRROR:-}" ]]; then
         echo 'Initializing TUF root...'
+        echo "${TUF_MIRROR}"
         cosign initialize --mirror "${TUF_MIRROR}" --root "${TUF_MIRROR}/root.json"
       fi
 
