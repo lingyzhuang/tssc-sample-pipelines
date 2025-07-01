@@ -27,11 +27,11 @@ spec:
     description: The public key that EC should use to verify signatures
     name: ec-public-key
     type: string
-  - default: http://rekor-server.tssc-tas.svc
+  - default: https://rekor-server-tssc-tas.apps.cluster-8qlnb.8qlnb.sandbox2351.opentlc.com
     description: The Rekor host that EC should use to look up transparency logs
     name: ec-rekor-host
     type: string
-  - default: http://tuf.tssc-tas.svc
+  - default: https://tuf-tssc-tas.apps.cluster-8qlnb.8qlnb.sandbox2351.opentlc.com
     description: The TUF mirror that EC should use
     name: ec-tuf-mirror
     type: string
